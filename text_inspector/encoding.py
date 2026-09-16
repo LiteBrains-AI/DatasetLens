@@ -11,37 +11,40 @@ class EncodingCheck:
 
         encodings = []
 
-        print("\nEncoding Detection")
-        print("-" * 20)
-
         for _, row in supported.iterrows():
             file = row["file"]
 
             try:
                 with open(file, "rb") as f:
-                    raw = f.read()
+                    raw = f.read(65536)
 
                 result = from_bytes(raw).best()
 
                 if result is not None:
                     encoding = result.encoding
+
                 else:
                     encoding = "Unknown"
 
-                print(
-                    f"{file.name}: "
-                    f"{encoding}"
-                )
-
-            except Exception as e:
+            except Exception:
                 encoding = "Error"
-
-                print(
-                    f"{file.name}: Error ({e})"
-                )
 
             encodings.append(encoding)
 
         supported["encoding"] = encodings
+
+        print("\nEncoding Distribution")
+        print("-" * 25)
+
+        distribution = (
+            supported["encoding"]
+            .value_counts()
+            .to_dict()
+        )
+
+        for encoding, count in distribution.items():
+            print(
+                f"{encoding}: {count}"
+            )
 
         return supported

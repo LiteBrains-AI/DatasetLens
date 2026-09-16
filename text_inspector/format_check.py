@@ -47,15 +47,27 @@ class FormatCheck:
         ]
 
         print(
-            f"\nUnsupported files: {len(unsupported)}"
+            f"\nUnsupported files: "
+            f"{len(unsupported)}"
         )
 
         if not unsupported.empty:
-            print("\nUnsupported Formats Found")
 
-            for _, row in unsupported.iterrows():
+            distribution = (
+                unsupported["format"]
+                .value_counts()
+                .to_dict()
+            )
+
+            print(
+                "\nUnsupported Format Distribution"
+            )
+
+            print("-" * 30)
+
+            for ext, count in distribution.items():
                 print(
-                    f"- {row['name']}"
+                    f"{ext}: {count}"
                 )
 
         return unsupported

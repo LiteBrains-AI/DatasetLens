@@ -59,6 +59,7 @@ class TextInspector:
         )
 
     def inspect(self):
+        print("=" * 30)
         print("\nDatasetLens - Text Inspector")
         print("=" * 30)
 

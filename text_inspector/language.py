@@ -12,9 +12,6 @@ class LanguageCheck:
 
         languages = []
 
-        print("\nLanguage Detection")
-        print("-" * 20)
-
         for _, row in supported.iterrows():
             file = row["file"]
 
@@ -25,7 +22,7 @@ class LanguageCheck:
                     encoding="utf-8",
                     errors="ignore"
                 ) as f:
-                    text = f.read()
+                    text = f.read(10000)
 
                 if not text.strip():
                     language = "Empty"
@@ -36,27 +33,28 @@ class LanguageCheck:
                 else:
                     language = detect(text)
 
-                print(
-                    f"{file.name}: "
-                    f"{language}"
-                )
-
             except LangDetectException:
                 language = "Unknown"
 
-                print(
-                    f"{file.name}: Unknown"
-                )
-
-            except Exception as e:
+            except Exception:
                 language = "Error"
-
-                print(
-                    f"{file.name}: Error ({e})"
-                )
 
             languages.append(language)
 
         supported["language"] = languages
+
+        print("\nLanguage Distribution")
+        print("-" * 25)
+
+        distribution = (
+            supported["language"]
+            .value_counts()
+            .to_dict()
+        )
+
+        for language, count in distribution.items():
+            print(
+                f"{language}: {count}"
+            )
 
         return supported
