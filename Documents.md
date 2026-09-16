@@ -24,3 +24,7 @@ English, Spanish, French, etc.
 - Unsupported file detection
 - Encoding detection
 - Language detection
+
+---
+### Next Goal:
+- Image inspection and analysis
