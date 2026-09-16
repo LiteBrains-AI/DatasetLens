@@ -9,7 +9,8 @@ Inspect your datasets before training models!
 DatasetLens helps identify file formats, dataset composition, supported/unsupported files across multiple data modalities.
 Identify broken/corrupt files, duplicate files and so on.
 
-*Warning* **🚧 Early Development (v0.1)**
+*Warning* **🚧 Early Development (v0.1)** Done ✅
+Stable: v0.2 is stable build!
 
 > **Star this repo for upcoming features or issue a request instead! 🐱** 
 ---
