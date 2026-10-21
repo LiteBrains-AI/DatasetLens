@@ -1,9 +1,8 @@
-__pycache__
 __pycache__/
 .venv/
 venv/
-.env
+.env/
 *.pyc
 *.log
 
-testset
+testset/
